@@ -1,0 +1,15 @@
+# From demonstration to reality — in four months
+
+- **May 2025** *(demonstrated)* — **GitHub MCP:** a malicious issue in a public repo steers an agent into copying **private**-repo data into a **public** pull request
+- **June 2025** *(an accident)* — **Asana:** the vendor's own hosted MCP server shows one company's project data to another · ~1,000 customer orgs affected
+- **Sept 2025** *(in the wild)* — **postmark-mcp:** a fake email server behaves correctly for months, then silently **BCCs every email to its author**
+
+**Three different failure modes: a hijacked agent · an honest vendor's bug · a malicious server.**
+
+<!-- Notes:
+Taken from the MCP deck's security slide with its notes (source: workshop-agentic-workflows/02, slide 06). Three minutes — one per case. The arc IS the message: demonstrated in May, real by September. Each case maps to a different question group on the vetting checklist, say that explicitly.
+GitHub (Invariant Labs, May 2025, researcher demonstration, no known in-the-wild exploitation): a user connects the GitHub MCP server with a broad personal access token. The agent reads a public issue containing hidden instructions, follows them, pulls data from the user's PRIVATE repositories, and opens a PUBLIC pull request containing it. All three Trifecta legs from ONE server plus one over-broad token. Checklist mapping: question 2 (what can it do in your name — least-privilege tokens) and question 4 (the Trifecta). The fixes are boring and effective: fine-grained tokens, read-only where possible, human approval on writes. (invariantlabs.ai/blog/mcp-github-vulnerability)
+Asana (June 2025, production bug, no attacker): a logic flaw in their hosted MCP server could show one organization's project data to another; ~1,000 customers potentially affected, service offline June 5-17. Lesson: even honest, competent vendors ship MCP integrations too fast — "is your multi-tenant isolation audited?" is YOUR question to ask a vendor. Checklist mapping: question 3 (where does your data go). (bleepingcomputer.com/news/security/asana-warns-mcp-ai-feature-exposed-customer-data-to-other-orgs/)
+postmark-mcp (Sept 2025, real attack, found by Koi Security): an npm package impersonating Postmark's mail server behaved correctly for months, then version 1.0.16 added one line silently BCC'ing every email to the author's domain. ~1,500 weekly downloads before removal. Lesson: a server is software you run with your rights; name-imitation is the oldest trick in the book. Checklist mapping: question 1 (who provides it). A 2026 alternative if you want a fresher case: the SmartLoader campaign (Feb 2026) trojanized a clone of the Oura Ring MCP server, complete with a faked GitHub ecosystem, to push the StealC infostealer. (thehackernews.com/2026/02/smartloader-attack-uses-trojanized-oura.html)
+Do NOT let this slide land as "MCP is dangerous, avoid it". Land it as: these are known, categorizable failure modes — and categorizable means checkable. Next slide: how to contain them.
+-->

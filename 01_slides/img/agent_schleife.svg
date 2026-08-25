@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0b0b0b"/>
+    </marker>
+    <marker id="arrGrayThin" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#898781"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="520" height="420" fill="#ffffff"/>
+
+  <!-- ============ Titel ============ -->
+  <text x="260" y="44" text-anchor="middle" font-size="22" font-weight="bold" fill="#0b0b0b">The agent</text>
+
+  <!-- ============ Ziel → LLM ============ -->
+  <rect x="20" y="122" width="100" height="56" rx="8" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.75"/>
+  <text x="70" y="156" text-anchor="middle" font-size="16" font-weight="bold" fill="#0b0b0b">Goal</text>
+
+  <line x1="120" y1="150" x2="170" y2="150" stroke="#0b0b0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- LLM node (the only colored element) -->
+  <rect x="170" y="114" width="130" height="72" rx="8" fill="#2a78d6"/>
+  <text x="235" y="146" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">LLM</text>
+  <text x="235" y="168" text-anchor="middle" font-size="13" fill="#ffffff" fill-opacity="0.9">decides</text>
+
+  <!-- ============ Schleife: wählt Aktion → Harness führt aus → Ergebnis zurück ============ -->
+  <path d="M300,132 L335,132 L335,112 L370,112" fill="none" stroke="#0b0b0b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="308" y="98" text-anchor="middle" font-size="14" font-style="italic" fill="#52514e">picks an action</text>
+
+  <path d="M370,208 L335,208 L335,168 L300,168" fill="none" stroke="#898781" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrGrayThin)"/>
+  <text x="330" y="230" text-anchor="middle" font-size="14" font-style="italic" fill="#52514e">Result</text>
+
+  <!-- Bausteine des augmented LLM -->
+  <g fill="#ffffff" stroke="#0b0b0b" stroke-width="1.75">
+    <rect x="370" y="92" width="130" height="40" rx="8"/>
+    <rect x="370" y="140" width="130" height="40" rx="8"/>
+    <rect x="370" y="188" width="130" height="40" rx="8"/>
+  </g>
+  <g text-anchor="middle" font-size="15" font-weight="bold" fill="#0b0b0b">
+    <text x="435" y="117">Tools</text>
+    <text x="435" y="165">Retrieval</text>
+    <text x="435" y="213">Memory</text>
+  </g>
+  <text x="435" y="252" text-anchor="middle" font-size="13" font-style="italic" fill="#52514e">harness executes</text>
+
+  <!-- ============ LLM → Ergebnis ============ -->
+  <line x1="235" y1="186" x2="235" y2="284" stroke="#0b0b0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="175" y="284" width="120" height="60" rx="8" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.75"/>
+  <text x="235" y="310" text-anchor="middle" font-size="16" font-weight="bold" fill="#0b0b0b">Result</text>
+  <text x="235" y="330" text-anchor="middle" font-size="14" fill="#52514e">goal reached</text>
+
+  <text x="260" y="390" text-anchor="middle" font-size="14" font-style="italic" fill="#52514e">the loop runs until the goal is reached</text>
+</svg>

@@ -1,66 +1,54 @@
 <div style="background-color: #ffffff; color: #000000; padding: 10px;">
-<img src="00_aisc\img\logo_aisc_bmftr.jpg">
-<h1> Your title.
+<img src="00_aisc/img/logo_aisc_bmftr.jpg">
+<h1> Which Tools May Your AI Agent Use? MCP in Practice
 </div>
 
-Your Project Description with a nice image
+Materials for a 1-hour workshop for companies planning their own AI agents: how to find suitable use cases and connect them to tools and data via the **Model Context Protocol (MCP)** — safely. No programming skills required. Participants leave with their own workflow draft, a security assessment of it, and concrete next steps. (Full description, in German: [WORKSHOP_DESCRIPTION.md](WORKSHOP_DESCRIPTION.md); content plan: [PLAN.md](PLAN.md).)
 
-## Features
+## Agenda
 
-- **Key Feature 1**: A description of the Key features
-- **Key Feature 2**: A description of the Key features
+| Time | Block |
+|---|---|
+| 0–15 min | Slides: agents, MCP, and the security risks that come with it |
+| 15–25 min | Live example: from idea to a working agent — including its security assessment, done out loud |
+| 25–45 min | Exercise in pairs (paper & pen): design your own workflow, find MCP servers, vet them |
+| 45–60 min | Pitches and discussion |
 
-## Setup and Installation
+## Repository map
 
-### Prerequisites
+| Folder | Contents |
+|---|---|
+| [01_slides/](01_slides/) | Marp slide deck (12 slides + 2 backups), with build instructions and speaker notes |
+| [02_handouts/](02_handouts/) | The three printed handouts: [vetting checklist](02_handouts/pruefraster.md), [worksheet](02_handouts/worksheet.md), [server menu](02_handouts/server_menu.md) |
+| [03_demo/](03_demo/) | The live-demo Langflow flow: setup, run of show, [filled model worksheet](03_demo/model_worksheet.md), fallback material |
+| [04_facilitation/](04_facilitation/) | [Run of show](04_facilitation/run_of_show.md) for the facilitator |
+| `00_aisc/` | AISC logos |
 
-- Docker and Docker Compose
-- NVIDIA GPU with CUDA support (optional, but recommended for faster performance)
+Materials are authored in **English**; translate to German at delivery time if the audience requires it. The source decks this workshop reuses live in `workshop-agentic-workflows/` (a separate repository, not tracked here — see the provenance map in [01_slides/README.md](01_slides/README.md)).
 
-### Quick Start
+## Building the slides
 
-1. Clone the repository:
-   ```bash
-   git clone ...
-   cd ...
-   ```
+```bash
+cd 01_slides
+mkdir -p build
+awk 'FNR==1 && NR>1 {print "\n---\n"} {print}' slides/*.md > build/deck.md
+npx @marp-team/marp-cli build/deck.md -o DRAFT_deck.pdf --allow-local-files
+```
 
-2. Run the setup or install dependencies:
-   ```bash
-   chmod +x setup.sh
-   ./setup.sh
-   ```
+Handouts are plain Markdown; render them to PDF for printing with the same tool or any Markdown-to-PDF converter, and check each fits one A4 sheet (front/back).
 
-3. Access the application:
-   - Frontend: ...
-   - Backend API: ...
+## Status
 
-## User Guide
-
-### Using the Tool
-1. A brief description of using the tool.
-2. Be clear and simple.
-
-### Recommendations
-Any additional hints for using the tool.
-
-
-## Limitations
-
-- **Limitation 1**: List of Limitations
-- **Limitation 2**: List of Limitations
-
-
-## References
-
-- [Reference 1](https://hpi.de/kisz)
-- [Reference 2](https://hpi.de/kisz)
+- [x] Slides, handouts, model worksheet, run of show
+- [ ] Langflow demo flow built and exported (see the checklist in [03_demo/README.md](03_demo/README.md))
+- [ ] Fallback recording/screenshots
+- [ ] Dry run, then trim
 
 ## Author
-- [Your Name](https://hpi.de/kisz)
+- [David Goll](https://hpi.de/kisz)
 
 ## License
-
+See [LICENSE](LICENSE).
 
 ---
 
