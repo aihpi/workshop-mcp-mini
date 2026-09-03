@@ -1,42 +1,42 @@
-# Live demo (workshop minutes 15–25)
+# Live demo — the KISZ inbox assistant (Gmail + Calendar + FAQ)
 
-One pre-built Langflow flow, shown running — then its security assessment done **out loud** with the vetting checklist. The demo deliberately models the exercise the participants do right afterwards; [model_worksheet.md](model_worksheet.md) is the same example on paper.
+The worked example for the workshop's live slot (~15–25 min). An agent in **Langflow** helps the KI-Servicezentrum's shared inbox: it **answers questions from the KISZ FAQ** and **drafts appointment replies from the calendar** — then we show how the same setup gets **hijacked by a single incoming email**, and how least privilege fixes it. The demo walks the *same* path the participants walk right afterwards.
+
+> ⚠️ Design docs only — **nothing is built yet**. Server choice is deliberately still open (see `02`/`03`). Verify all server names/scopes and Google facts before building.
+
+## This folder
+
+| File | What it is |
+|---|---|
+| [`01_use_case.md`](01_use_case.md) | The use case as a worked worksheet (idea → narrowing → why-agentic) |
+| [`02_server_search.md`](02_server_search.md) | Our real search walkthrough + candidate shortlist (official Google prioritized) |
+| [`03_security_assessment.md`](03_security_assessment.md) | Prüfraster verdicts, Trifecta/Rule-of-Two, the mitigations = the "fix" |
+| [`04_build_plan.md`](04_build_plan.md) | The Langflow build (flow, OAuth checklist, system prompt, tool-toggle) |
+| [`05_example_emails.md`](05_example_emails.md) | Seed emails + prompts + expected behaviour (incl. the attack) |
+| [`faq/`](faq/) | KISZ FAQ markdown the read-only FAQ server serves |
+| `fallback/` | Screenshots + recording go here (produced when building) |
 
 ## The flow
 
-The personalised research assistant: an agent with **two MCP servers** that contrast instructively — one remote first-party (your data leaves the machine) and one local community server (foreign code runs on your machine).
-
 ```
-Chat Input ─────────────► Agent ─────────► Chat Output
-LLM (AISC hub / LiteLLM) ─► Agent
-                            ▲ tools
-                            ├── MCP: mem0   (remote, Streamable HTTP — user profile memory)
-                            ├── MCP: arXiv  (local stdio via uvx — paper search)
-                            └── Current Date
+Chat Input ─► Agent (KISZ AI Hub LLM) ─► Chat Output
+               ▲ tools
+               ├── MCP: Email + Calendar   (read + draft · [send]/[delete] off for the safe config)
+               └── MCP: FAQ (filesystem, read-only, scoped to faq/)
 ```
 
-## One-time setup
+## Run of show (~10 min)
 
-1. **Langflow** running (with `uv` installed where Langflow runs, for the stdio server).
-2. **mem0 (remote):** API key from app.mem0.ai (free tier). Langflow → Settings → MCP Servers: Streamable HTTP, URL `https://mcp.mem0.ai/mcp`, header `Authorization: Bearer <KEY>`. Then **Refresh Tools** on the node.
-3. **arXiv (local stdio):** `command: uvx`, `args: ["arxiv-mcp-server"]` — pin a version. **Refresh Tools** should list ~14 tools.
-4. Agent system prompt pins `user_id = workshop_demo_user` for mem0 (store and recall must use the same id, or recall comes back empty).
-5. Tool Mode on for both MCP nodes; wire both toolsets + Current Date into the Agent.
+1. **Idea → narrow (1 min):** "help our shared inbox" → answer FAQ questions + draft appointment replies (`01`).
+2. **Search (2 min):** hunt a directory for gmail/calendar; hit the fake-"official" listing, then find the *genuinely* official Google server (`02`). Lesson: "official" is a claim to verify.
+3. **Assess (2 min):** run candidates through the Prüfraster live → the whole-workflow Trifecta → the config that makes it acceptable (`03`).
+4. **Connect + good run (3 min):** Refresh Tools (discovery, live), then the sichte-Prompt → FAQ-grounded answer + a calendar slot proposal. The value.
+5. **Reveal + fix (3 min):** one incoming email (`E6`) hijacks the run — forward of the confidential mail + calendar delete — then **toggle off `send`/`delete`** → re-run → defanged. 🔴→🟡.
 
-## Run of show (10 min)
+## Setup (summary)
 
-1. **(2 min)** Show the flow canvas. Point at the two MCP nodes: "these are plugs, not code we wrote." Click **Refresh Tools** on one — the tool list appearing live IS the `tools/list` discovery from the slides.
-2. **(3 min)** Run the two prompts from the model worksheet (store profile → ask for papers). Let the tool calls scroll past; narrate which server each call goes to.
-3. **(5 min)** The actual point: put the **vetting checklist** under the doc camera (or on a slide) and assess both servers out loud, arriving at 🟡 for each **for different reasons** (mem0: data leaves; arXiv: foreign code runs locally). End on the Trifecta check: "no channel out — the day we give this agent email, we add a human approval."
+Throwaway Google account + Google Cloud OAuth (least-privilege scopes), a Langflow flow with two MCP nodes, the FAQ folder, and a tool-call-tested AI-Hub model. Full steps in [`04_build_plan.md`](04_build_plan.md).
 
-## Fallbacks (prepare both before the dry run)
+## Fallbacks (build before the dry run)
 
-- **Recording:** screen recording of steps 1–2 → `fallback/` (plays if Langflow or the venue Wi-Fi dies). Step 3 needs no technology — the checklist works on paper.
-- **Screenshots:** flow canvas, tool list after refresh, one answer with visible tool calls → `fallback/`.
-
-## Still to do (needs a live Langflow instance)
-
-- [ ] Build the flow, export the flow JSON into this folder
-- [ ] mem0 key for the workshop account (do not demo with a personal key)
-- [ ] Record the fallback material
-- [ ] Test the AISC-hub model actually tool-calls reliably (10 representative requests)
+Screen recording of the good run + the reveal, and screenshots (canvas, tool list, a draft, the caught injection) in `fallback/`. The assessment half (`03`) needs no technology and always works on paper.
