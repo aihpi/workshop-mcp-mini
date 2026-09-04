@@ -1,8 +1,8 @@
 # Live demo — the KISZ inbox assistant (Gmail + Calendar + FAQ)
 
-The worked example for the workshop's live slot (~15–25 min). An agent in **Langflow** helps the KI-Servicezentrum's shared inbox: it **answers questions from the KISZ FAQ** and **drafts appointment replies from the calendar** — then we show how the same setup gets **hijacked by a single incoming email**, and how least privilege fixes it. The demo walks the *same* path the participants walk right afterwards.
+The worked example for the workshop's live slot (~15–25 min). An agent helps the KI-Servicezentrum's shared inbox: it **answers questions from the KISZ FAQ** and **drafts appointment replies from the calendar** — then we show how the same setup gets **hijacked by a single incoming email**, and how least privilege fixes it. The demo walks the *same* path the participants walk right afterwards.
 
-> ⚠️ Design docs only — **nothing is built yet**. Server choice is deliberately still open (see `02`/`03`). Verify all server names/scopes and Google facts before building.
+> **Decided:** the live demo runs in **Claude** (official Google Gmail + Calendar connectors), triggered manually — see [`06_claude_demo.md`](06_claude_demo.md). The always-on **Langflow/n8n** build ([`04_build_plan.md`](04_build_plan.md)) is a **stretch goal**, not required for the workshop.
 
 ## This folder
 
@@ -11,10 +11,11 @@ The worked example for the workshop's live slot (~15–25 min). An agent in **La
 | [`01_use_case.md`](01_use_case.md) | The use case as a worked worksheet (idea → narrowing → why-agentic) |
 | [`02_server_search.md`](02_server_search.md) | Our real search walkthrough + candidate shortlist (official Google prioritized) |
 | [`03_security_assessment.md`](03_security_assessment.md) | Prüfraster verdicts, Trifecta/Rule-of-Two, the mitigations = the "fix" |
-| [`04_build_plan.md`](04_build_plan.md) | The Langflow build (flow, OAuth checklist, system prompt, tool-toggle) |
+| [`06_claude_demo.md`](06_claude_demo.md) | **The live demo we run** — Claude + Google connectors, manual, with screenshots |
+| [`04_build_plan.md`](04_build_plan.md) | *Stretch goal:* the always-on Langflow build (flow, OAuth, tool-toggle) |
 | [`05_example_emails.md`](05_example_emails.md) | Seed emails + prompts + expected behaviour (incl. the attack) |
-| [`faq/`](faq/) | KISZ FAQ markdown the read-only FAQ server serves |
-| `fallback/` | Screenshots + recording go here (produced when building) |
+| [`faq.md`](faq.md) | KISZ FAQ (real content from hpi.de) — paste into Claude Project knowledge |
+| `fallback/` | Screenshots + recording (the demo screenshots live in `00_aisc/img/Screenshots_MCP_demo/`) |
 
 ## The flow
 

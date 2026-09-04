@@ -1,4 +1,7 @@
-# 04 · Build plan — Langflow (not built yet)
+# 04 · Build plan — Langflow always-on (STRETCH GOAL, not built yet)
+
+> **Note:** the live workshop demo runs in **Claude** — see [`06_claude_demo.md`](06_claude_demo.md). This Langflow build is the optional "how you'd productionize it as a 24/7 agent" path, to attempt only if time allows. Langflow has no native scheduler/email trigger, so always-on needs an external trigger (poller) calling the flow; n8n is an easier alternative for the always-on part (native Gmail trigger + AI Agent node), and both can run on the KISZ AI Hub via LiteLLM.
+
 
 Detailed enough to execute later without more research. Written against the **leading candidate**, but **provisional on the `02`/`03` decision** (official Google server vs broad-scope community server for the danger demo).
 
