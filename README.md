@@ -3,49 +3,41 @@
 <h1> Which Tools May Your AI Agent Use? MCP in Practice
 </div>
 
-Materials for a 1-hour workshop for companies planning their own AI agents: how to find suitable use cases and connect them to tools and data via the **Model Context Protocol (MCP)** — safely. No programming skills required. Participants leave with their own workflow draft, a security assessment of it, and concrete next steps. (Full description, in German: [WORKSHOP_DESCRIPTION.md](WORKSHOP_DESCRIPTION.md); content plan: [PLAN.md](PLAN.md).)
+Materials for a 1-hour workshop for organisations planning their own AI agents: how to find suitable use cases and connect them to tools and data via the **Model Context Protocol (MCP)**. 
 
 ## Agenda
 
 | Time | Block |
 |---|---|
 | 0–15 min | Slides: agents, MCP, and the security risks that come with it |
-| 15–25 min | Live example: from idea to a working agent — including its security assessment, done out loud |
+| 15–25 min | Live example: from idea to a working agent, including its security assessment |
 | 25–45 min | Exercise in pairs (paper & pen): design your own workflow, find MCP servers, vet them |
 | 45–60 min | Pitches and discussion |
 
-## Repository map
+## What's in this repository
 
 | Folder | Contents |
 |---|---|
-| [01_slides/](01_slides/) | Marp slide deck (12 slides + 2 backups), with build instructions and speaker notes |
-| [02_handouts/](02_handouts/) | The three printed handouts: [vetting checklist](02_handouts/pruefraster.md), [worksheet](02_handouts/worksheet.md), [server menu](02_handouts/server_menu.md) |
-| [03_demo/](03_demo/) | The live-demo Langflow flow: setup, run of show, [filled model worksheet](03_demo/model_worksheet.md), fallback material |
-| [04_facilitation/](04_facilitation/) | [Run of show](04_facilitation/run_of_show.md) for the facilitator |
-| `00_aisc/` | AISC logos |
+| [01_slides/](01_slides/) | The talk as slides — **English and German**, as `.pptx` and `.pdf` |
+| [02_handouts/](02_handouts/) | The printable handouts for the exercise — `.md` source and ready-to-print `.pdf` |
+| `00_aisc/` | AISC / BMFTR logos |
 
-Materials are authored in **English**; translate to German at delivery time if the audience requires it. The source decks this workshop reuses live in `workshop-agentic-workflows/` (a separate repository, not tracked here — see the provenance map in [01_slides/README.md](01_slides/README.md)).
+### Slides
 
-## Building the slides
+The deck is provided as PowerPoint and PDF, in both languages:
+`Presentation-MCP-Workshop_english.{pptx,pdf}` and `Presentation-MCP-Workshop_german.{pptx,pdf}`.
+The editable source diagrams are in [`01_slides/img/`](01_slides/img/).
 
-```bash
-cd 01_slides
-mkdir -p build
-awk 'FNR==1 && NR>1 {print "\n---\n"} {print}' slides/*.md > build/deck.md
-npx @marp-team/marp-cli build/deck.md -o DRAFT_deck.pdf --allow-local-files
-```
+### Handouts
 
-Handouts are plain Markdown; render them to PDF for printing with the same tool or any Markdown-to-PDF converter, and check each fits one A4 sheet (front/back).
+Two one-page handouts, ready to print (A4):
 
-## Status
-
-- [x] Slides, handouts, model worksheet, run of show
-- [ ] Langflow demo flow built and exported (see the checklist in [03_demo/README.md](03_demo/README.md))
-- [ ] Fallback recording/screenshots
-- [ ] Dry run, then trim
+- **[Vetting checklist ("Prüfraster")](02_handouts/pruefraster.md)** — the five questions to decide whether an MCP server is safe to connect, with a traffic-light verdict.
+- **[Planning worksheet](02_handouts/worksheet.md)** — design one agentic workflow and assess it.
 
 ## Author
-- [David Goll](https://hpi.de/kisz)
+- [David Goll](https://github.com/golldavid)
+- [Jill Barvencik](https://github.com/Jill-Barvencik)
 
 ## License
 See [LICENSE](LICENSE).
